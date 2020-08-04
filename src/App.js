@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { v4 as uuid } from 'uuid';
-// import styled from 'styled-components'
+import styled from 'styled-components'
 import './App.css';
 
 // import App components
@@ -62,9 +61,12 @@ loadUsers() {
     <div>
       <h3>Github User Cards</h3>
       <UserCard data={this.state.data} />
+      <div>
       {this.state.followers.map(follower => {
-        return <UserCard key={uuid()} data={follower} />
+        return <UserCard key={this.state.data.id} data={follower} />
       })}
+      </div>
+      
     </div>
   )
 }
@@ -72,14 +74,25 @@ loadUsers() {
   render() {
     return (
       <div className="App">
+            <StyledAppContainer>
         <header className="App-header">
           {this.state.data.length === 0 ? 
           'Please wait while data loads...' : 
           this.loadUsers()}
         </header>
+      </StyledAppContainer>
       </div>
      );
    }
 }
 
 export default App;
+
+const StyledAppContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+`
